@@ -85,6 +85,18 @@ const descriptions = [
   "Maximum uptime, minimum disruptions.",
   "Smart design. Seamless execution.",
 ];
+const serviceBanners = [
+  "/network-infrastructure",
+  "/connecting-network-cables-in-server-room.jpg",
+  "/fiberlan",
+  "/data-centre-corridor.png",
+  "/server-installation-configuration-service.webp",
+  "/switches-routeers.webp",
+  "/CCTV-Surveillance-Networking.webp",
+  "/cable-tray-fitted.jpg",
+  "/Annual-Maintenance-Contracts-alimtedad.webp",
+  "/router-hero.png",
+];
 const catalogue = categories.flatMap((category, categoryIndex) =>
   category.rows.map((row, rowIndex) => ({
     id: `${categoryIndex}-${rowIndex}`,
@@ -1283,12 +1295,15 @@ function RatesPage() {
       ),
     [category, query],
   );
+  const selectedCategory = category === "all" ? null : categories[+category];
+  const selectedBanner = category === "all" ? null : serviceBanners[+category];
   return (
     <>
       <PageHero
-        eyebrow="RATE GUIDE"
-        title="Service Rate Guide"
+        eyebrow={selectedCategory ? "SERVICE CATEGORY" : "RATE GUIDE"}
+        title={selectedCategory?.title || "Service Rate Guide"}
         intro="Browse indicative labour and service rates in Indian Rupees. Confirm final pricing after a site survey and scope review."
+        image={selectedBanner || "/server-room-hero.png"}
       />
       <main className="page-body shell">
         <PageIntro

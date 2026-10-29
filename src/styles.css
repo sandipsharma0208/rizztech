@@ -72,7 +72,7 @@ img {
 .desktop-nav .active:after {
   content: "";
   position: absolute;
-  bottom: 24px;
+  bottom: -8px;
   left: 0;
   right: 0;
   height: 2px;
