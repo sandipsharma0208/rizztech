@@ -137,6 +137,26 @@ function Logo({ light = false, compact = false }) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    };
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    return () => {
+      document.body.style.position = previousBodyStyles.position;
+      document.body.style.top = previousBodyStyles.top;
+      document.body.style.width = previousBodyStyles.width;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
   const serviceLinks = [
     ["All services", routes.services],
     ["Routers", routes.routers],
@@ -224,23 +244,52 @@ function Header() {
       </div>
       {open && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
-          {[
-            ["Home", routes.home],
-            ["Services", routes.services],
-            ["Routers", routes.routers],
-            ["Rate guide", routes.rates],
-            ["Terms", routes.terms],
-            ["Industries", routes.industries],
-          ].map(([label, href]) => (
-            <a key={href} href={href}>
-              {label}
-            </a>
-          ))}
-          {industryLinks.map(([label, href]) => (
-            <a className="mobile-industry-link" key={href} href={href}>
-              {label}
-            </a>
-          ))}
+          <a href={routes.home}>Home</a>
+          <div className="mobile-nav-group">
+            <div className="mobile-nav-heading">
+              <button
+                className="mobile-nav-toggle"
+                type="button"
+                aria-expanded={mobileServicesOpen}
+                aria-controls="mobile-services-menu"
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              >
+                Services <ChevronDown size={18} />
+              </button>
+            </div>
+            {mobileServicesOpen && (
+              <div className="mobile-nav-submenu" id="mobile-services-menu">
+                {serviceLinks.map(([label, href]) => (
+                  <a key={href} href={href}>
+                    {label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="mobile-nav-group">
+            <div className="mobile-nav-heading">
+              <button
+                className="mobile-nav-toggle"
+                type="button"
+                aria-expanded={mobileIndustriesOpen}
+                aria-controls="mobile-industries-menu"
+                onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+              >
+                Industries <ChevronDown size={18} />
+              </button>
+            </div>
+            {mobileIndustriesOpen && (
+              <div className="mobile-nav-submenu" id="mobile-industries-menu">
+                <a href={routes.industries}>All Industries</a>
+                {industryLinks.map(([label, href]) => (
+                  <a key={href} href={href}>
+                    {label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
           {[
             ["Projects", routes.projects],
             ["About Us", routes.about],

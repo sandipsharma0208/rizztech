@@ -138,8 +138,33 @@ img {
 .mobile-nav a:hover {
   background: #edf6ff;
 }
-.mobile-nav .mobile-industry-link {
-  @apply pl-9 text-sm font-medium;
+.mobile-nav-group {
+  min-width: 0;
+}
+.mobile-nav-heading {
+  @apply flex items-center justify-between;
+}
+.mobile-nav-heading .mobile-nav-toggle {
+  @apply flex w-full items-center justify-between rounded-lg px-4 py-2 font-semibold;
+  border: 0;
+  background: transparent;
+  color: #0b2850;
+}
+.mobile-nav-toggle svg {
+  flex-shrink: 0;
+  transition: transform 160ms ease;
+}
+.mobile-nav-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.mobile-nav-heading .mobile-nav-toggle:hover {
+  background: #edf6ff;
+}
+.mobile-nav-submenu {
+  @apply grid gap-1 pl-4;
+}
+.mobile-nav .mobile-nav-submenu a {
+  @apply px-4 py-2 text-sm font-medium;
   color: #41617f;
 }
 .hero {
