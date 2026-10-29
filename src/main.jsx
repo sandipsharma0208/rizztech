@@ -121,14 +121,17 @@ const readEstimate = () => {
 
 function Logo({ light = false, compact = false }) {
   return (
-    <a
-      className={`logo ${light ? "logo-light" : ""}`}
-      href={routes.home}
-      aria-label="RizzTech home"
-    >
-      <img src={withBase("/logo-mark.png")} alt="" />
-      {!compact && <span>RizzTech</span>}
-    </a>
+    <>
+      <a
+        className={`logo ${light ? "logo-light" : ""}`}
+        href={routes.home}
+        aria-label="RizzTech home"
+      >
+        <img src={withBase("/logo-mark.png")} alt="" />
+        {!compact && <span>RizzTech</span>}
+      </a>
+      <p>The Standard for Performance</p>
+    </>
   );
 }
 
@@ -512,7 +515,6 @@ function Footer() {
       <div className="shell footer-top">
         <div className="footer-about">
           <Logo light />
-          <p>The Standard for Performance</p>
         </div>
         <div>
           <h3>Quick Links</h3>
