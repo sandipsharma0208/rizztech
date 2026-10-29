@@ -184,7 +184,10 @@ function Header() {
     <header className="site-header relative z-30 bg-white shadow-sm">
       <div className="shell header-row mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px] flex items-center justify-between gap-6 [min-height:88px] max-[800px]:[min-height:72px]">
         <Logo />
-        <nav className="desktop-nav flex items-center gap-8 [align-self:stretch] [&_>_a]:inline-flex [&_>_a]:items-center [&_>_a]:gap-1 [&_>_a]:text-sm [&_>_a]:font-semibold [&_>_a]:transition-colors [&_>_a]:[position:relative] [&_>_a]:[color:#102847] [&_>_a:hover]:[color:#0069d9] [&_.active]:[color:#006be8] [&_.active:after]:[content:''] [&_.active:after]:[position:absolute] [&_.active:after]:[bottom:-8px] [&_.active:after]:[left:0] [&_.active:after]:[right:0] [&_.active:after]:[height:2px] [&_.active:after]:[background:#0b71e9] max-[1100px]:[gap:16px] max-[1100px]:[&_>_a]:[font-size:12px] max-[800px]:[display:none]" aria-label="Main navigation">
+        <nav
+          className="desktop-nav flex items-center gap-8 [align-self:stretch] [&_>_a]:inline-flex [&_>_a]:items-center [&_>_a]:gap-1 [&_>_a]:text-sm [&_>_a]:font-semibold [&_>_a]:transition-colors [&_>_a]:[position:relative] [&_>_a]:[color:#102847] [&_>_a:hover]:[color:#0069d9] [&_.active]:[color:#006be8] [&_.active:after]:[content:''] [&_.active:after]:[position:absolute] [&_.active:after]:[bottom:-8px] [&_.active:after]:[left:0] [&_.active:after]:[right:0] [&_.active:after]:[height:2px] [&_.active:after]:[background:#0b71e9] max-[1100px]:[gap:16px] max-[1100px]:[&_>_a]:[font-size:12px] max-[800px]:[display:none]"
+          aria-label="Main navigation"
+        >
           <a className={page === "home" ? "active" : ""} href={routes.home}>
             Home
           </a>
@@ -241,7 +244,10 @@ function Header() {
             Contact
           </a>
         </nav>
-        <a className="btn btn-primary header-quote inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)] px-5 max-[800px]:[display:none]" href={routes.estimate}>
+        <a
+          className="btn btn-primary header-quote inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)] px-5 max-[800px]:[display:none]"
+          href={routes.estimate}
+        >
           Get a Quote <ArrowRight size={15} />
         </a>
         <button
@@ -255,7 +261,10 @@ function Header() {
         </button>
       </div>
       {open && (
-        <nav className="mobile-nav absolute left-0 right-0 top-full grid gap-1 overflow-y-auto bg-white p-5 shadow-xl [max-height:calc(100vh_-_72px)] [&_a]:rounded-lg [&_a]:px-4 [&_a]:py-2 [&_a]:font-semibold [&_a:hover]:[background:#edf6ff] [&_.mobile-nav-submenu_a]:px-4 [&_.mobile-nav-submenu_a]:py-2 [&_.mobile-nav-submenu_a]:text-sm [&_.mobile-nav-submenu_a]:font-medium [&_.mobile-nav-submenu_a]:[color:#41617f]" aria-label="Mobile navigation">
+        <nav
+          className="mobile-nav absolute left-0 right-0 top-full grid gap-1 overflow-y-auto bg-white p-5 shadow-xl [max-height:calc(100vh_-_72px)] [&_a]:rounded-lg [&_a]:px-4 [&_a]:py-2 [&_a]:font-semibold [&_a:hover]:[background:#edf6ff] [&_.mobile-nav-submenu_a]:px-4 [&_.mobile-nav-submenu_a]:py-2 [&_.mobile-nav-submenu_a]:text-sm [&_.mobile-nav-submenu_a]:font-medium [&_.mobile-nav-submenu_a]:[color:#41617f]"
+          aria-label="Mobile navigation"
+        >
           <a href={routes.home}>Home</a>
           <div className="mobile-nav-group [min-width:0]">
             <div className="mobile-nav-heading flex items-center justify-between [&_.mobile-nav-toggle]:flex [&_.mobile-nav-toggle]:w-full [&_.mobile-nav-toggle]:items-center [&_.mobile-nav-toggle]:justify-between [&_.mobile-nav-toggle]:rounded-lg [&_.mobile-nav-toggle]:px-4 [&_.mobile-nav-toggle]:py-2 [&_.mobile-nav-toggle]:font-semibold [&_.mobile-nav-toggle]:[border:0] [&_.mobile-nav-toggle]:[background:transparent] [&_.mobile-nav-toggle]:[color:#0b2850] [&_.mobile-nav-toggle:hover]:[background:#edf6ff]">
@@ -270,7 +279,10 @@ function Header() {
               </button>
             </div>
             {mobileServicesOpen && (
-              <div className="mobile-nav-submenu grid gap-1 pl-4" id="mobile-services-menu">
+              <div
+                className="mobile-nav-submenu grid gap-1 pl-4"
+                id="mobile-services-menu"
+              >
                 {serviceLinks.map(([label, href]) => (
                   <a key={href} href={href}>
                     {label}
@@ -292,7 +304,10 @@ function Header() {
               </button>
             </div>
             {mobileIndustriesOpen && (
-              <div className="mobile-nav-submenu grid gap-1 pl-4" id="mobile-industries-menu">
+              <div
+                className="mobile-nav-submenu grid gap-1 pl-4"
+                id="mobile-industries-menu"
+              >
                 <a href={routes.industries}>All Industries</a>
                 {industryLinks.map(([label, href]) => (
                   <a key={href} href={href}>
@@ -330,7 +345,10 @@ function ServiceCard({ category, index }) {
   const href =
     index === 5 ? routes.routers : `${routes.rates}?category=${index}`;
   return (
-    <a className="service-card relative flex min-h-[190px] flex-col rounded-lg border bg-white p-5 transition-all [border-color:#e7ecf1] [box-shadow:0_3px_14px_rgba(7,_33,_73,_0.055)] [&:hover]:[border-color:#a9d3fb] [&:hover]:[box-shadow:0_12px_28px_rgba(7,_69,_141,_0.12)] [&:hover]:[transform:translateY(-3px)] [&_h3]:mt-4 [&_h3]:mb-0 [&_h3]:text-sm [&_h3]:font-extrabold [&_h3]:leading-snug [&_h3]:[color:#0b2549] [&_p]:mt-2 [&_p]:mb-5 [&_p]:text-xs [&_p]:leading-relaxed [&_p]:[color:#68788f] max-[600px]:[min-height:200px] max-[600px]:[padding:15px] max-[600px]:[&_h3]:[font-size:13px] max-[600px]:[&_p]:[font-size:11px]" href={href}>
+    <a
+      className="service-card relative flex min-h-[190px] flex-col rounded-lg border bg-white p-5 transition-all [border-color:#e7ecf1] [box-shadow:0_3px_14px_rgba(7,_33,_73,_0.055)] [&:hover]:[border-color:#a9d3fb] [&:hover]:[box-shadow:0_12px_28px_rgba(7,_69,_141,_0.12)] [&:hover]:[transform:translateY(-3px)] [&_h3]:mt-4 [&_h3]:mb-0 [&_h3]:text-sm [&_h3]:font-extrabold [&_h3]:leading-snug [&_h3]:[color:#0b2549] [&_p]:mt-2 [&_p]:mb-5 [&_p]:text-xs [&_p]:leading-relaxed [&_p]:[color:#68788f] max-[600px]:[min-height:200px] max-[600px]:[padding:15px] max-[600px]:[&_h3]:[font-size:13px] max-[600px]:[&_p]:[font-size:11px]"
+      href={href}
+    >
       <span className="card-icon flex items-center justify-center rounded-xl [width:48px] [height:48px] [color:#086bca] [background:#edf6ff]">
         <Icon size={28} strokeWidth={2.3} />
       </span>
@@ -414,10 +432,16 @@ function Home() {
               future-ready.
             </p>
             <div className="hero-actions mt-7 flex flex-wrap gap-3">
-              <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.services}>
+              <a
+                className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+                href={routes.services}
+              >
                 Explore Our Services <ArrowRight size={17} />
               </a>
-              <a className="btn btn-outline inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_rgba(255,_255,_255,_0.75)] [color:white] [background:rgba(3,_17,_38,_0.18)] [&:hover]:[background:rgba(255,_255,_255,_0.13)]" href={routes.contact}>
+              <a
+                className="btn btn-outline inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_rgba(255,_255,_255,_0.75)] [color:white] [background:rgba(3,_17,_38,_0.18)] [&:hover]:[background:rgba(255,_255,_255,_0.13)]"
+                href={routes.contact}
+              >
                 Talk to Our Experts
               </a>
             </div>
@@ -433,7 +457,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="services-section [padding:42px_0_60px] [background:#fff] max-[600px]:[padding:38px_0]" id="services">
+      <section
+        className="services-section [padding:42px_0_60px] [background:#fff] max-[600px]:[padding:38px_0]"
+        id="services"
+      >
         <div className="shell mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px]">
           <div className="section-heading-row mb-5 flex items-end justify-between gap-6 [&_h2]:m-0 [&_h2]:font-extrabold [&_h2]:tracking-tight [&_h2]:[font-size:34px] [&_h2]:[line-height:1.14] [&_h2]:[color:#0b2241] [&_p:not(.section-label)]:mt-2 [&_p:not(.section-label)]:mb-0 [&_p:not(.section-label)]:max-w-[620px] [&_p:not(.section-label)]:text-sm [&_p:not(.section-label)]:leading-relaxed [&_p:not(.section-label)]:[color:#53647b] max-[600px]:[align-items:flex-start] max-[600px]:[flex-direction:column] max-[600px]:[&_h2]:[font-size:28px]">
             <div>
@@ -444,7 +471,10 @@ function Home() {
                 scalable and secure solutions for businesses of all sizes.
               </p>
             </div>
-            <a className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]" href={routes.services}>
+            <a
+              className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
+              href={routes.services}
+            >
               View All Services <ArrowRight size={16} />
             </a>
           </div>
@@ -460,8 +490,14 @@ function Home() {
         </div>
       </section>
 
-      <section className="partner-section [background:#fafcff] [padding:50px_0] max-[600px]:[padding:35px_0]" id="about">
-        <div className="shell partner-layout mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px] grid items-center gap-12 [grid-template-columns:46%_1fr] max-[800px]:[grid-template-columns:1fr]" id="projects">
+      <section
+        className="partner-section [background:#fafcff] [padding:50px_0] max-[600px]:[padding:35px_0]"
+        id="about"
+      >
+        <div
+          className="shell partner-layout mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px] grid items-center gap-12 [grid-template-columns:46%_1fr] max-[800px]:[grid-template-columns:1fr]"
+          id="projects"
+        >
           <div className="partner-photo relative overflow-hidden rounded-xl [min-height:360px] [&_>_img]:[width:100%] [&_>_img]:[height:360px] [&_>_img]:[object-fit:cover] max-[800px]:[min-height:300px] max-[800px]:[height:300px] max-[800px]:[&_>_img]:[min-height:300px] max-[800px]:[&_>_img]:[height:300px]">
             <img
               src={withBase("/data-centre-corridor.png")}
@@ -488,12 +524,18 @@ function Home() {
               dedicated support to deliver networks and data centre
               infrastructure that meets your business goals.
             </p>
-            <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.about}>
+            <a
+              className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+              href={routes.about}
+            >
               Learn More <ArrowRight size={16} />
             </a>
             <div className="benefit-grid mt-8 grid grid-cols-3 gap-x-5 gap-y-6 max-[1100px]:[grid-template-columns:repeat(2,_1fr)] max-[600px]:[gap:14px]">
               {benefits.map(([Icon, label]) => (
-                <div className="benefit flex items-center gap-3 [&_span]:flex [&_span]:shrink-0 [&_span]:items-center [&_span]:justify-center [&_span]:rounded-full [&_span]:[width:42px] [&_span]:[height:42px] [&_span]:[background:#e8f4ff] [&_span]:[color:#0871d8] [&_strong]:text-xs [&_strong]:font-bold [&_strong]:leading-snug [&_strong]:[color:#163458] max-[600px]:[gap:7px] max-[600px]:[&_span]:[width:36px] max-[600px]:[&_span]:[height:36px] max-[600px]:[&_strong]:[font-size:11px]" key={label}>
+                <div
+                  className="benefit flex items-center gap-3 [&_span]:flex [&_span]:shrink-0 [&_span]:items-center [&_span]:justify-center [&_span]:rounded-full [&_span]:[width:42px] [&_span]:[height:42px] [&_span]:[background:#e8f4ff] [&_span]:[color:#0871d8] [&_strong]:text-xs [&_strong]:font-bold [&_strong]:leading-snug [&_strong]:[color:#163458] max-[600px]:[gap:7px] max-[600px]:[&_span]:[width:36px] max-[600px]:[&_span]:[height:36px] max-[600px]:[&_strong]:[font-size:11px]"
+                  key={label}
+                >
                   <span>
                     <Icon size={23} />
                   </span>
@@ -505,7 +547,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="industry-section [background:#eaf6ff] [padding:42px_0]" id="industries">
+      <section
+        className="industry-section [background:#eaf6ff] [padding:42px_0]"
+        id="industries"
+      >
         <div className="shell industry-layout mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px] grid items-center gap-9 [grid-template-columns:31%_1fr] max-[800px]:[grid-template-columns:1fr]">
           <div className="industry-copy [&_h2]:m-0 [&_h2]:font-extrabold [&_h2]:tracking-tight [&_h2]:[font-size:34px] [&_h2]:[line-height:1.14] [&_h2]:[color:#0b2241] [&_p:not(.section-label)]:mt-3 [&_p:not(.section-label)]:mb-5 [&_p:not(.section-label)]:text-sm [&_p:not(.section-label)]:leading-relaxed [&_p:not(.section-label)]:[color:#526d83] max-[600px]:[&_h2]:[font-size:28px]">
             <SectionLabel>INDUSTRIES WE SERVE</SectionLabel>
@@ -518,7 +563,10 @@ function Home() {
               We work with businesses across various sectors to build robust and
               secure network infrastructures.
             </p>
-            <a className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]" href={routes.industries}>
+            <a
+              className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]"
+              href={routes.industries}
+            >
               Explore Industries <ArrowRight size={16} />
             </a>
           </div>
@@ -684,7 +732,10 @@ function ServicesPage() {
           <p>
             Build an indicative labour estimate from the service rate guide.
           </p>
-          <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.estimate}>
+          <a
+            className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+            href={routes.estimate}
+          >
             Create an Estimate <ArrowRight size={16} />
           </a>
         </div>
@@ -757,7 +808,10 @@ function IndustriesPage() {
             Start with an indicative estimate, then confirm the details for your
             site and scope.
           </p>
-          <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.estimate}>
+          <a
+            className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+            href={routes.estimate}
+          >
             Build an Estimate <ArrowRight size={16} />
           </a>
         </div>
@@ -844,7 +898,10 @@ function ProjectsPage() {
               imagePosition,
               rateCategory,
             }) => (
-              <article className="project-card overflow-hidden rounded-xl border bg-white [border-color:#e0eaf3] [box-shadow:0_5px_20px_rgba(7,_33,_73,_0.055)]" key={title}>
+              <article
+                className="project-card overflow-hidden rounded-xl border bg-white [border-color:#e0eaf3] [box-shadow:0_5px_20px_rgba(7,_33,_73,_0.055)]"
+                key={title}
+              >
                 <div
                   className={`project-photo ${imagePosition ? "project-photo-grid [background-size:400%_200%]" : "[background-size:cover]"} [height:180px] [background-position:center]`}
                   style={{
@@ -889,10 +946,16 @@ function ProjectsPage() {
             starting estimate.
           </p>
           <div className="cta-actions flex flex-wrap gap-3">
-            <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.contact}>
+            <a
+              className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+              href={routes.contact}
+            >
               Start an Enquiry <ArrowRight size={16} />
             </a>
-            <a className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]" href={routes.estimate}>
+            <a
+              className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]"
+              href={routes.estimate}
+            >
               Build an Estimate
             </a>
           </div>
@@ -931,7 +994,10 @@ function AboutPage() {
               the work, agree the scope, then install, configure, test and
               document the result.
             </p>
-            <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.services}>
+            <a
+              className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+              href={routes.services}
+            >
               Explore Our Services <ArrowRight size={16} />
             </a>
           </div>
@@ -962,7 +1028,10 @@ function AboutPage() {
                 "Scope, milestones and expectations are made clear in the quotation.",
               ],
             ].map(([Icon, title, text]) => (
-              <div className="value-card rounded-xl border bg-white p-6 [border-color:#e0eaf3] [box-shadow:0_5px_20px_rgba(7,_33,_73,_0.055)] [&_h3]:mt-5 [&_h3]:mb-2 [&_h3]:text-base [&_h3]:font-bold [&_h3]:[color:#0b2549] [&_p]:m-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:[color:#62798d]" key={title}>
+              <div
+                className="value-card rounded-xl border bg-white p-6 [border-color:#e0eaf3] [box-shadow:0_5px_20px_rgba(7,_33,_73,_0.055)] [&_h3]:mt-5 [&_h3]:mb-2 [&_h3]:text-base [&_h3]:font-bold [&_h3]:[color:#0b2549] [&_p]:m-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:[color:#62798d]"
+                key={title}
+              >
                 <span className="card-icon flex items-center justify-center rounded-xl [width:48px] [height:48px] [color:#086bca] [background:#edf6ff]">
                   <Icon size={26} />
                 </span>
@@ -978,10 +1047,16 @@ function AboutPage() {
             Explore the services or prepare the details of your next project.
           </p>
           <div className="cta-actions flex flex-wrap gap-3">
-            <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.contact}>
+            <a
+              className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+              href={routes.contact}
+            >
               Contact RizzTech <ArrowRight size={16} />
             </a>
-            <a className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]" href={routes.projects}>
+            <a
+              className="btn btn-line inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [border:1px_solid_#0a7add] [color:#0a72cf] [background:transparent] [&:hover]:[background:#fff]"
+              href={routes.projects}
+            >
               View Project Types
             </a>
           </div>
@@ -1080,7 +1155,10 @@ function ContactPage() {
               Prepare your enquiry below, then open it in your email app to send
               to RizzTech.
             </p>
-            <form className="contact-form grid gap-5 [&_label]:grid [&_label]:gap-2 [&_label]:text-sm [&_label]:font-bold [&_label]:[color:#183b60] [&_input]:w-full [&_input]:rounded-lg [&_input]:border [&_input]:bg-white [&_input]:px-4 [&_input]:py-3 [&_input]:text-sm [&_input]:outline-none [&_input]:[border-color:#cfdde9] [&_input]:[color:#142f50] [&_select]:w-full [&_select]:rounded-lg [&_select]:border [&_select]:bg-white [&_select]:px-4 [&_select]:py-3 [&_select]:text-sm [&_select]:outline-none [&_select]:[border-color:#cfdde9] [&_select]:[color:#142f50] [&_textarea]:w-full [&_textarea]:rounded-lg [&_textarea]:border [&_textarea]:bg-white [&_textarea]:px-4 [&_textarea]:py-3 [&_textarea]:text-sm [&_textarea]:outline-none [&_textarea]:[border-color:#cfdde9] [&_textarea]:[color:#142f50] [&_input:focus]:[border-color:#0873e6] [&_input:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_select:focus]:[border-color:#0873e6] [&_select:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_textarea:focus]:[border-color:#0873e6] [&_textarea:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_textarea]:[resize:vertical] [&_.btn]:[justify-self:start]" onSubmit={prepare}>
+            <form
+              className="contact-form grid gap-5 [&_label]:grid [&_label]:gap-2 [&_label]:text-sm [&_label]:font-bold [&_label]:[color:#183b60] [&_input]:w-full [&_input]:rounded-lg [&_input]:border [&_input]:bg-white [&_input]:px-4 [&_input]:py-3 [&_input]:text-sm [&_input]:outline-none [&_input]:[border-color:#cfdde9] [&_input]:[color:#142f50] [&_select]:w-full [&_select]:rounded-lg [&_select]:border [&_select]:bg-white [&_select]:px-4 [&_select]:py-3 [&_select]:text-sm [&_select]:outline-none [&_select]:[border-color:#cfdde9] [&_select]:[color:#142f50] [&_textarea]:w-full [&_textarea]:rounded-lg [&_textarea]:border [&_textarea]:bg-white [&_textarea]:px-4 [&_textarea]:py-3 [&_textarea]:text-sm [&_textarea]:outline-none [&_textarea]:[border-color:#cfdde9] [&_textarea]:[color:#142f50] [&_input:focus]:[border-color:#0873e6] [&_input:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_select:focus]:[border-color:#0873e6] [&_select:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_textarea:focus]:[border-color:#0873e6] [&_textarea:focus]:[box-shadow:0_0_0_3px_rgba(8,_115,_230,_0.12)] [&_textarea]:[resize:vertical] [&_.btn]:[justify-self:start]"
+              onSubmit={prepare}
+            >
               <div className="form-two grid grid-cols-2 gap-4 max-[600px]:[grid-template-columns:1fr]">
                 <label>
                   Full name{" "}
@@ -1139,7 +1217,10 @@ function ContactPage() {
                   placeholder="Tell us about your site, timeline and what you need..."
                 />
               </label>
-              <button className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" type="submit">
+              <button
+                className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+                type="submit"
+              >
                 Prepare Enquiry <ArrowRight size={16} />
               </button>
             </form>
@@ -1154,14 +1235,23 @@ function ContactPage() {
               points or devices, access conditions, expected timeline and
               support needs.
             </p>
-            <a className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]" href={`mailto:${contactEmail}`}>
+            <a
+              className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
+              href={`mailto:${contactEmail}`}
+            >
               <Mail size={16} />
               {contactEmail}
             </a>
-            <a className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]" href={routes.estimate}>
+            <a
+              className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
+              href={routes.estimate}
+            >
               Build a labour estimate <ArrowRight size={15} />
             </a>
-            <a className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]" href={routes.terms}>
+            <a
+              className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
+              href={routes.terms}
+            >
               Review quotation terms <ArrowRight size={15} />
             </a>
             {selected.length > 0 && (
@@ -1195,7 +1285,10 @@ function ContactPage() {
               rows="12"
             />
             <div className="draft-actions mt-4 flex flex-wrap items-center gap-3 [&_span]:text-sm [&_span]:[font-weight:600] [&_span]:[color:#1b6b9e]">
-              <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={emailHref}>
+              <a
+                className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+                href={emailHref}
+              >
                 <Mail size={16} /> Open Email to Send
               </a>
               <button
@@ -1335,11 +1428,16 @@ function RatesPage() {
               ))}
             </select>
           </label>
-          <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.estimate}>
+          <a
+            className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+            href={routes.estimate}
+          >
             Estimate ({Object.keys(estimate).length}) <ArrowRight size={15} />
           </a>
         </div>
-        <p className="result-count mb-3 text-xs font-semibold [color:#66809b]">{results.length} services found</p>
+        <p className="result-count mb-3 text-xs font-semibold [color:#66809b]">
+          {results.length} services found
+        </p>
         {results.length ? (
           <RateTable
             items={results}
@@ -1395,7 +1493,10 @@ function RoutersPage() {
               "Connect people, devices and locations with control.",
             ],
           ].map(([Icon, title, desc]) => (
-            <div className="router-feature rounded-xl border p-6 [border-color:#e3eaf1] [background:#fff] [box-shadow:0_5px_18px_rgba(7,_33,_73,_0.045)] [&_h3]:mt-4 [&_h3]:mb-1 [&_h3]:text-base [&_h3]:font-bold [&_h3]:[color:#0b2549] [&_p]:m-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:[color:#65788c]" key={title}>
+            <div
+              className="router-feature rounded-xl border p-6 [border-color:#e3eaf1] [background:#fff] [box-shadow:0_5px_18px_rgba(7,_33,_73,_0.045)] [&_h3]:mt-4 [&_h3]:mb-1 [&_h3]:text-base [&_h3]:font-bold [&_h3]:[color:#0b2549] [&_p]:m-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:[color:#65788c]"
+              key={title}
+            >
               <span className="card-icon flex items-center justify-center rounded-xl [width:48px] [height:48px] [color:#086bca] [background:#edf6ff]">
                 <Icon size={27} />
               </span>
@@ -1404,7 +1505,9 @@ function RoutersPage() {
             </div>
           ))}
         </div>
-        <h2 className="subheading mt-10 mb-4 text-2xl font-bold [color:#0b2549]">Suggested service rates</h2>
+        <h2 className="subheading mt-10 mb-4 text-2xl font-bold [color:#0b2549]">
+          Suggested service rates
+        </h2>
         <RateTable items={routerItems} />
         <div className="page-cta mt-11 rounded-xl p-8 [background:#eaf5ff] [&_h2]:m-0 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:[color:#08264a] [&_p]:mt-2 [&_p]:mb-5 [&_p]:text-sm [&_p]:[color:#536c83]">
           <h2>Need a tailored quotation?</h2>
@@ -1412,7 +1515,10 @@ function RoutersPage() {
             Add router work to a budget estimate, then confirm the scope with
             RizzTech.
           </p>
-          <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={`${routes.rates}?category=5`}>
+          <a
+            className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+            href={`${routes.rates}?category=5`}
+          >
             Explore Router Rates <ArrowRight size={16} />
           </a>
         </div>
@@ -1476,7 +1582,10 @@ function EstimatePage() {
           <>
             <div className="estimate-list mt-5 overflow-hidden rounded-xl border [border-color:#dfebf4]">
               {selected.map((item) => (
-                <div className="estimate-line flex items-center gap-4 border-b px-5 py-4 [border-color:#e4edf4] [&:last-child]:[border:0] [&_>_div]:flex [&_>_div]:flex-1 [&_>_div]:flex-col [&_>_div]:gap-1 [&_strong]:text-sm [&_strong]:[color:#102e51] [&_span]:text-xs [&_span]:[color:#687d90] [&_label]:flex [&_label]:items-center [&_label]:gap-2 [&_label]:text-xs [&_label]:font-bold [&_label]:[color:#516c82] [&_input]:[width:65px] [&_input]:[border:1px_solid_#d2e0eb] [&_input]:[border-radius:6px] [&_input]:[padding:7px] [&_input]:[color:#123050] [&_>_button]:[color:#69829a] [&_>_button:hover]:[color:#c32f4a] max-[600px]:[align-items:flex-start] max-[600px]:[flex-wrap:wrap] max-[600px]:[&_>_div]:[flex-basis:100%]" key={item.id}>
+                <div
+                  className="estimate-line flex items-center gap-4 border-b px-5 py-4 [border-color:#e4edf4] [&:last-child]:[border:0] [&_>_div]:flex [&_>_div]:flex-1 [&_>_div]:flex-col [&_>_div]:gap-1 [&_strong]:text-sm [&_strong]:[color:#102e51] [&_span]:text-xs [&_span]:[color:#687d90] [&_label]:flex [&_label]:items-center [&_label]:gap-2 [&_label]:text-xs [&_label]:font-bold [&_label]:[color:#516c82] [&_input]:[width:65px] [&_input]:[border:1px_solid_#d2e0eb] [&_input]:[border-radius:6px] [&_input]:[padding:7px] [&_input]:[color:#123050] [&_>_button]:[color:#69829a] [&_>_button:hover]:[color:#c32f4a] max-[600px]:[align-items:flex-start] max-[600px]:[flex-wrap:wrap] max-[600px]:[&_>_div]:[flex-basis:100%]"
+                  key={item.id}
+                >
                   <div>
                     <strong>{item.name}</strong>
                     <span>
@@ -1539,7 +1648,10 @@ function EstimatePage() {
             <Boxes size={30} />
             <h3>No services added yet</h3>
             <p>Choose a service above or add one from the rate guide.</p>
-            <a className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]" href={routes.rates}>
+            <a
+              className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
+              href={routes.rates}
+            >
               Browse rate guide <ArrowRight size={15} />
             </a>
           </div>
@@ -1550,7 +1662,10 @@ function EstimatePage() {
             Review the commercial terms and agree the scope, milestones, taxes
             and exclusions.
           </p>
-          <a className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]" href={routes.terms}>
+          <a
+            className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
+            href={routes.terms}
+          >
             Review Terms <ArrowRight size={16} />
           </a>
         </div>
@@ -1610,7 +1725,11 @@ function App() {
     terms: <TermsPage />,
   }[page] || <Home />;
   return (
-    <div className={"[font-family:Inter,_Arial,_Helvetica,sans-serif] [color:#071c3b] [background-color:#fff] [font-synthesis:none] [scroll-behavior:smooth] [&_*]:[box-sizing:border-box] [&_body]:m-0 [&_button]:cursor-pointer [&_a]:[text-decoration:none] [&_a]:[color:inherit] [&_button]:[font:inherit] [&_input]:[font:inherit] [&_select]:[font:inherit] [&_img]:block [&_img]:[max-width:100%]"}>
+    <div
+      className={
+        "[font-family:Inter,_Arial,_Helvetica,sans-serif] [color:#071c3b] [background-color:#fff] [font-synthesis:none] [scroll-behavior:smooth] [&_*]:[box-sizing:border-box] [&_body]:m-0 [&_button]:cursor-pointer [&_a]:[text-decoration:none] [&_a]:[color:inherit] [&_button]:[font:inherit] [&_input]:[font:inherit] [&_select]:[font:inherit] [&_img]:block [&_img]:[max-width:100%]"
+      }
+    >
       <Header />
       {content}
       <Footer />
