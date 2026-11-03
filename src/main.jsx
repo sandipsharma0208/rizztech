@@ -52,7 +52,7 @@ const routes = Object.fromEntries(
     terms: "/terms/",
   }).map(([name, path]) => [name, withBase(path)]),
 );
-const contactEmail = "sandipsharma0206@gmail.com";
+const contactEmail = "rizwansk0804@gmail.com";
 const industrySlug = (label) =>
   label
     .toLowerCase()
@@ -732,20 +732,18 @@ function IndustriesPage() {
           title="Built for your environment"
           text="Explore the sectors we serve and the services that support their day-to-day connectivity."
         />
-        <div className="industry-detail-grid grid grid-cols-3 gap-6 max-[600px]:[grid-template-columns:1fr]">
+        <div className="industry-detail-grid grid gap-6">
           {industries.map(([label, Icon, index]) => (
             <section
               className="industry-detail-card overflow-hidden rounded-xl border bg-white [scroll-margin-top:110px] [border-color:#e1eaf3] [box-shadow:0_5px_20px_rgba(7,_33,_73,_0.06)]"
               id={industrySlug(label)}
               key={label}
             >
-              <div
-                className="industry-detail-photo [height:190px] [background-image:url('/industries-grid.png')] [background-size:400%_200%] [background-repeat:no-repeat]"
-                style={{
-                  backgroundPosition: `${((index % 4) * 100) / 3}% ${Math.floor(index / 4) * 100}%`,
-                }}
-                role="img"
-                aria-label={`${label} infrastructure`}
+              <img
+                className="industry-detail-photo"
+                src={withBase(`/industry-${index}.webp`)}
+                alt={`${label} infrastructure`}
+                loading="lazy"
               />
               <div className="industry-detail-content p-6 [&_h2]:mt-4 [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:[color:#0b2549] [&_>_p]:mt-0 [&_>_p]:mb-4 [&_>_p]:text-sm [&_>_p]:leading-relaxed [&_>_p]:[color:#647a90]">
                 <span className="card-icon flex items-center justify-center rounded-xl [width:48px] [height:48px] [color:#086bca] [background:#edf6ff]">
