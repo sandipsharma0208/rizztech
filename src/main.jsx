@@ -33,6 +33,7 @@ import {
   X,
 } from "lucide-react";
 import { categories, terms, checklist } from "./catalog.js";
+import { regions, regionalRates } from "./regionalRates.js";
 import "./styles.css";
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -105,6 +106,9 @@ const catalogue = categories.flatMap((category, categoryIndex) =>
     name: row[0],
     unit: row[1],
     rate: row[2],
+    regionalRates: regionalRates[categoryIndex].map(
+      (region) => region[rowIndex],
+    ),
     note: row[3],
   })),
 );
@@ -116,6 +120,10 @@ const range = (value) => {
   );
   return v.length === 2 ? v : null;
 };
+const rateForRegion = (item, regionIndex) =>
+  regionIndex === undefined ? item.rate : item.regionalRates[regionIndex];
+const displayRate = (rate) =>
+  rate === "Custom quotation" || rate === "Site quotation" ? rate : `₹${rate}`;
 const readEstimate = () => {
   try {
     const stored = JSON.parse(
@@ -150,7 +158,6 @@ function Logo({ light = false, compact = false }) {
 function Header() {
   const [open, setOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
     const scrollY = window.scrollY;
@@ -176,10 +183,6 @@ function Header() {
     ["Estimate", routes.estimate],
     ["Terms", routes.terms],
   ];
-  const industryLinks = industries.map(([label]) => [
-    label,
-    `${routes.industries}#${industrySlug(label)}`,
-  ]);
   return (
     <header className="site-header relative z-30 bg-white shadow-sm">
       <div className="shell header-row mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px] flex items-center justify-between gap-6 [min-height:88px] max-[800px]:[min-height:72px]">
@@ -210,24 +213,12 @@ function Header() {
               ))}
             </div>
           </div>
-          <div className="nav-dropdown [&_>_a]:inline-flex [&_>_a]:items-center [&_>_a]:gap-1 [&_>_a]:text-sm [&_>_a]:font-semibold [&_>_a]:transition-colors [&_>_a]:[position:relative] [&_>_a]:[color:#102847] [&_>_a:hover]:[color:#0069d9] relative flex items-center [&:hover_.dropdown-panel]:block [&:focus-within_.dropdown-panel]:block max-[1100px]:[&_>_a]:[font-size:12px]">
-            <a
-              className={page === "industries" ? "active" : ""}
-              href={routes.industries}
-            >
-              Industries <ChevronDown size={12} />
-            </a>
-            <div className="dropdown-panel industry-dropdown-panel absolute left-0 top-full hidden min-w-[190px] rounded-xl bg-white p-2 shadow-xl [border:1px_solid_#e6edf5] [&_a]:block [&_a]:rounded-lg [&_a]:px-3 [&_a]:py-2 [&_a]:text-sm [&_a]:font-medium [&_a:hover]:[background:#edf6ff] [&_a:hover]:[color:#006be8] [min-width:270px] [max-height:70vh] [overflow-y:auto] [&_.dropdown-overview]:flex [&_.dropdown-overview]:items-center [&_.dropdown-overview]:justify-between [&_.dropdown-overview]:font-bold [&_.dropdown-overview]:[color:#006be8] [&_.dropdown-overview]:[border-bottom:1px_solid_#e6edf5] [&_.dropdown-overview]:[border-radius:0] [&_.dropdown-overview]:[margin-bottom:4px]">
-              <a className="dropdown-overview" href={routes.industries}>
-                All Industries <ArrowRight size={14} />
-              </a>
-              {industryLinks.map(([label, href]) => (
-                <a key={href} href={href}>
-                  {label}
-                </a>
-              ))}
-            </div>
-          </div>
+          <a
+            className={page === "industries" ? "active" : ""}
+            href={routes.industries}
+          >
+            Industries
+          </a>
           <a
             className={page === "projects" ? "active" : ""}
             href={routes.projects}
@@ -291,32 +282,7 @@ function Header() {
               </div>
             )}
           </div>
-          <div className="mobile-nav-group [min-width:0]">
-            <div className="mobile-nav-heading flex items-center justify-between [&_.mobile-nav-toggle]:flex [&_.mobile-nav-toggle]:w-full [&_.mobile-nav-toggle]:items-center [&_.mobile-nav-toggle]:justify-between [&_.mobile-nav-toggle]:rounded-lg [&_.mobile-nav-toggle]:px-4 [&_.mobile-nav-toggle]:py-2 [&_.mobile-nav-toggle]:font-semibold [&_.mobile-nav-toggle]:[border:0] [&_.mobile-nav-toggle]:[background:transparent] [&_.mobile-nav-toggle]:[color:#0b2850] [&_.mobile-nav-toggle:hover]:[background:#edf6ff]">
-              <button
-                className="mobile-nav-toggle [&_svg]:[flex-shrink:0] [&_svg]:[transition:transform_160ms_ease] [&[aria-expanded='true']_svg]:[transform:rotate(180deg)]"
-                type="button"
-                aria-expanded={mobileIndustriesOpen}
-                aria-controls="mobile-industries-menu"
-                onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
-              >
-                Industries <ChevronDown size={18} />
-              </button>
-            </div>
-            {mobileIndustriesOpen && (
-              <div
-                className="mobile-nav-submenu grid gap-1 pl-4"
-                id="mobile-industries-menu"
-              >
-                <a href={routes.industries}>All Industries</a>
-                {industryLinks.map(([label, href]) => (
-                  <a key={href} href={href}>
-                    {label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
+          <a href={routes.industries}>Industries</a>
           {[
             ["Projects", routes.projects],
             ["About Us", routes.about],
@@ -1002,6 +968,48 @@ function AboutPage() {
             </a>
           </div>
         </section>
+        <section className="about-scope mt-12 [background:#f0f7fd] [padding:32px] max-[600px]:[padding:22px] [&_h2]:m-0 [&_h2]:text-2xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:[color:#0b2549] [&_p:not(.section-label)]:mt-3 [&_p:not(.section-label)]:text-sm [&_p:not(.section-label)]:leading-relaxed [&_p:not(.section-label)]:[color:#5a7086]">
+          <div className="grid items-start gap-8 [grid-template-columns:0.8fr_1.2fr] max-[800px]:[grid-template-columns:1fr]">
+            <div>
+              <SectionLabel>WHAT WE DO</SectionLabel>
+              <h2>Infrastructure that works as one</h2>
+            </div>
+            <p className="!mt-0">
+              We bring connectivity, data-centre foundations and ongoing care
+              into one coordinated scope, planned around how your business
+              operates.
+            </p>
+          </div>
+          <div className="mt-7 grid grid-cols-3 gap-6 max-[700px]:[grid-template-columns:1fr]">
+            {[
+              [
+                Network,
+                "Connect",
+                "Structured cabling, fiber and Wi-Fi linking people, devices and sites.",
+              ],
+              [
+                Server,
+                "Build",
+                "Server rooms, switches and routers planned around capacity and security needs.",
+              ],
+              [
+                LifeBuoy,
+                "Maintain",
+                "Testing, documentation and maintenance to support dependable operations.",
+              ],
+            ].map(([Icon, title, text]) => (
+              <div className="border-t pt-5 [border-color:#d6e7f5]" key={title}>
+                <span className="flex items-center gap-3 [color:#0873d1]">
+                  <Icon size={22} />
+                  <h3 className="m-0 text-base font-bold [color:#14375b]">
+                    {title}
+                  </h3>
+                </span>
+                <p className="mb-0">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
         <section className="about-values [&_h2]:m-0 [&_h2]:text-3xl [&_h2]:font-extrabold [&_h2]:leading-tight [&_h2]:[color:#0b2549] mt-14 [&_h2]:mb-6 max-[600px]:[&_h2]:[font-size:26px]">
           <SectionLabel>OUR APPROACH</SectionLabel>
           <h2>Clear work. Reliable outcomes.</h2>
@@ -1314,15 +1322,16 @@ function ContactPage() {
   );
 }
 
-function RateTable({ items, onAdd }) {
+function RateTable({ items, onAdd, regionIndex }) {
   return (
     <div className="rate-table-wrap [width:100%] [overflow:auto] [border:1px_solid_#d9e4ee] [border-radius:8px]">
-      <table className="rate-table [width:100%] [border-collapse:collapse] [min-width:790px] [font-size:13px] [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-bold [&_th]:text-white [&_th]:[background:#143b6e] [&_td]:px-4 [&_td]:py-3 [&_td]:align-top [&_td]:[color:#153050] [&_td]:[border-top:1px_solid_#dce5ef] [&_tbody_tr:nth-child(even)]:[background:#f4f8fc] [&_tbody_tr:hover]:[background:#eaf5ff] [&_th:nth-child(1)]:[width:27%] [&_th:nth-child(2)]:[width:13%] [&_th:nth-child(3)]:[width:16%] [&_th:nth-child(4)]:[width:38%]">
+      <table className="rate-table [width:100%] [border-collapse:collapse] [min-width:980px] [font-size:13px] [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-bold [&_th]:text-white [&_th]:[background:#143b6e] [&_td]:px-4 [&_td]:py-3 [&_td]:align-top [&_td]:[color:#153050] [&_td]:[border-top:1px_solid_#dce5ef] [&_tbody_tr:nth-child(even)]:[background:#f4f8fc] [&_tbody_tr:hover]:[background:#eaf5ff] [&_th:nth-child(1)]:[width:18%] [&_th:nth-child(2)]:[width:22%] [&_th:nth-child(3)]:[width:11%] [&_th:nth-child(4)]:[width:15%] [&_th:nth-child(5)]:[width:29%]">
         <thead>
           <tr>
+            <th>Category</th>
             <th>Service / Work Description</th>
             <th>Unit</th>
-            <th>Suggested Rate</th>
+            <th>Indicative Rate (₹)</th>
             <th>Notes / Included Work</th>
             {onAdd && <th>Estimate</th>}
           </tr>
@@ -1330,13 +1339,11 @@ function RateTable({ items, onAdd }) {
         <tbody>
           {items.map((item) => (
             <tr key={item.id}>
+              <td>{item.category}</td>
               <td>{item.name}</td>
               <td>{item.unit}</td>
               <td className="rate-cell whitespace-nowrap font-bold [color:#0a5bb5]">
-                {item.rate === "Custom quotation" ||
-                item.rate === "Site quotation"
-                  ? item.rate
-                  : `₹${item.rate}`}
+                {displayRate(rateForRegion(item, regionIndex))}
               </td>
               <td>{item.note}</td>
               {onAdd && (
@@ -1371,7 +1378,14 @@ function useEstimate() {
 }
 
 function RatesPage() {
-  const initial = new URLSearchParams(location.search).get("category");
+  const searchParams = new URLSearchParams(location.search);
+  const initial = searchParams.get("category");
+  const initialRegion = regions.findIndex(
+    ({ id }) => id === searchParams.get("region"),
+  );
+  const [regionIndex, setRegionIndex] = useState(
+    initialRegion < 0 ? 0 : initialRegion,
+  );
   const [category, setCategory] = useState(
     initial !== null && categories[+initial] ? initial : "all",
   );
@@ -1400,10 +1414,24 @@ function RatesPage() {
       />
       <main className="page-body shell [padding-top:48px] [padding-bottom:70px] max-[600px]:[padding-top:35px] mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px]">
         <PageIntro
-          title="Find the work. See the range."
-          text="Search the complete service list or filter by category. Add services to your browser-local estimate."
+          title={`Regional service price list — ${regions[regionIndex].label}`}
+          text={`Indicative labour and service rates in Indian Rupees. Pricing basis: indicative ${regions[regionIndex].uplift} uplift on labour/service rates. Rates are suggested estimates, not verified market quotations; confirm the final rate after reviewing the site and scope.`}
         />
         <div className="rate-controls mb-3 flex flex-wrap items-center gap-3">
+          <label className="select-box flex items-center gap-2 rounded-lg border px-4 [height:46px] [border-color:#d4e1ed] [color:#3471ab] [background:#fff] [&_select]:border-0 [&_select]:outline-none [&_select]:[max-width:320px] [&_select]:[color:#0b2443] [&_select]:[background:transparent]">
+            <SlidersHorizontal size={18} />
+            <select
+              aria-label="Select pricing region"
+              value={regionIndex}
+              onChange={(event) => setRegionIndex(Number(event.target.value))}
+            >
+              {regions.map((region, index) => (
+                <option key={region.id} value={index}>
+                  {region.label}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="search-box flex items-center gap-2 rounded-lg border px-4 [height:46px] [border-color:#d4e1ed] [color:#3471ab] [background:#fff] [flex:1] [min-width:230px] [&_input]:w-full [&_input]:border-0 [&_input]:outline-none [&_input]:[color:#0b2443] [&_input]:[background:transparent]">
             <Search size={19} />
             <input
@@ -1430,7 +1458,7 @@ function RatesPage() {
           </label>
           <a
             className="btn btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-bold transition-all [white-space:nowrap] [background:#0873e6] [color:#fff] [box-shadow:0_8px_22px_rgba(0,_100,_210,_0.18)] [&:hover]:[background:#005bc4] [&:hover]:[transform:translateY(-1px)]"
-            href={routes.estimate}
+            href={`${routes.estimate}?region=${regions[regionIndex].id}`}
           >
             Estimate ({Object.keys(estimate).length}) <ArrowRight size={15} />
           </a>
@@ -1441,6 +1469,7 @@ function RatesPage() {
         {results.length ? (
           <RateTable
             items={results}
+            regionIndex={regionIndex}
             onAdd={(id) => update(id, (estimate[id] || 0) + 1)}
           />
         ) : (
@@ -1451,9 +1480,12 @@ function RatesPage() {
           </div>
         )}
         <p className="rate-disclaimer mt-5 text-xs leading-relaxed [color:#647b92]">
-          Rates are suggested starting estimates for budgeting and quotation
-          preparation. Equipment, material, GST, transport and other expenses
-          are separate unless stated in writing.
+          Travel, accommodation, freight, tolls, parking and mobilisation are
+          charged separately where applicable. Materials, equipment, licences
+          and consumables are excluded unless explicitly included in the
+          quotation. Applicable GST and statutory charges are extra unless
+          stated otherwise. Final pricing depends on site survey, access, cable
+          route, working hours, scope and customer-approved BOQ.
         </p>
       </main>
     </>
@@ -1528,10 +1560,19 @@ function RoutersPage() {
 }
 
 function EstimatePage() {
+  const initialRegion = regions.findIndex(
+    ({ id }) => id === new URLSearchParams(location.search).get("region"),
+  );
+  const [regionIndex, setRegionIndex] = useState(
+    initialRegion < 0 ? 0 : initialRegion,
+  );
   const [estimate, update] = useEstimate();
   const [pick, setPick] = useState(catalogue[0].id);
   const selected = Object.entries(estimate)
-    .map(([id, qty]) => ({ ...itemMap.get(id), qty: +qty }))
+    .map(([id, qty]) => {
+      const item = itemMap.get(id);
+      return { ...item, rate: item.regionalRates[regionIndex], qty: +qty };
+    })
     .filter((item) => item.id);
   const priced = selected.filter((item) => range(item.rate));
   const low = priced.reduce(
@@ -1556,6 +1597,17 @@ function EstimatePage() {
         />
         <div className="estimate-picker flex flex-wrap gap-3 rounded-xl p-4 [background:#eaf5ff] [&_select]:flex-1 [&_select]:rounded-lg [&_select]:border [&_select]:bg-white [&_select]:px-4 [&_select]:py-3 [&_select]:text-sm [&_select]:[min-width:250px] [&_select]:[border-color:#c7dceb] [&_select]:[color:#183858]">
           <select
+            aria-label="Estimate pricing region"
+            value={regionIndex}
+            onChange={(event) => setRegionIndex(Number(event.target.value))}
+          >
+            {regions.map((region, index) => (
+              <option key={region.id} value={index}>
+                {region.label} ({region.uplift})
+              </option>
+            ))}
+          </select>
+          <select
             aria-label="Choose a service"
             value={pick}
             onChange={(e) => setPick(e.target.value)}
@@ -1564,7 +1616,7 @@ function EstimatePage() {
               <optgroup key={c.title} label={c.title}>
                 {c.rows.map((row, ri) => (
                   <option key={`${ci}-${ri}`} value={`${ci}-${ri}`}>
-                    {row[0]} — {row[2]}
+                    {row[0]} — {displayRate(regionalRates[ci][regionIndex][ri])}
                   </option>
                 ))}
               </optgroup>
@@ -1650,7 +1702,7 @@ function EstimatePage() {
             <p>Choose a service above or add one from the rate guide.</p>
             <a
               className="text-link inline-flex shrink-0 items-center gap-2 text-sm font-bold [color:#006fdf] [&:hover]:[color:#004eac]"
-              href={routes.rates}
+              href={`${routes.rates}?region=${regions[regionIndex].id}`}
             >
               Browse rate guide <ArrowRight size={15} />
             </a>
@@ -1727,7 +1779,7 @@ function App() {
   return (
     <div
       className={
-        "[font-family:Inter,_Arial,_Helvetica,sans-serif] [color:#071c3b] [background-color:#fff] [font-synthesis:none] [scroll-behavior:smooth] [&_*]:[box-sizing:border-box] [&_body]:m-0 [&_button]:cursor-pointer [&_a]:[text-decoration:none] [&_a]:[color:inherit] [&_button]:[font:inherit] [&_input]:[font:inherit] [&_select]:[font:inherit] [&_img]:block [&_img]:[max-width:100%]"
+        "[font-family:Inter,_Arial,_Helvetica,sans-serif] [color:#071c3b] [background-color:#fff] [font-synthesis:none] [scroll-behavior:smooth] [&_*]:[box-sizing:border-box] [&_body]:m-0 [&_button]:cursor-pointer [&_a]:[text-decoration:none] [&_button]:[font:inherit] [&_input]:[font:inherit] [&_select]:[font:inherit] [&_img]:block [&_img]:[max-width:100%]"
       }
     >
       <Header />

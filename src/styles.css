@@ -1,1 +1,67 @@
 @import "tailwindcss";
+
+.btn {
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.btn svg {
+  flex: 0 0 auto;
+}
+
+.industry-service-links a {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 56px;
+  justify-content: space-between;
+  overflow-wrap: anywhere;
+}
+
+.industry-service-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.industry-service-links a:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 800px) {
+  .hero-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-row > p {
+    display: none;
+  }
+
+  .industry-service-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .industry-service-links a:last-child {
+    grid-column: auto;
+  }
+
+  .industry-service-links a {
+    min-height: 48px;
+  }
+
+  .btn {
+    width: 100%;
+    min-height: 44px;
+    padding-inline: 1rem;
+    line-height: 1.35;
+  }
+}
