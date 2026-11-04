@@ -21,9 +21,10 @@ for (const route of routes) {
   const html = await readFile(file, "utf8");
   const url = `https://www.rizztech.in/${route ? `${route}/` : ""}`;
   const title = html.match(/<title>(.*?)<\/title>/)?.[1];
-  const description = html.match(
-    /<meta name="description" content="([^"]+)"/,
-  )?.[1];
+  const descriptionTag = html.match(
+    /<meta\b(?=[^>]*\bname="description")[^>]*>/s,
+  )?.[0];
+  const description = descriptionTag?.match(/\bcontent="([^"]+)"/)?.[1];
   const rootStart = html.indexOf('<div id="root">') + '<div id="root">'.length;
   const rootEnd = html.lastIndexOf("</div>");
   const renderedApp = html.slice(rootStart, rootEnd);
