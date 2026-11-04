@@ -630,6 +630,7 @@ function Footer() {
             <br />
             Data Centre Solutions
           </p>
+          <p>GST Registration Number: 27MOMPS5147G1Z6</p>
           <a href={routes.rates}>
             Explore rates <ArrowUpRight size={14} />
           </a>
