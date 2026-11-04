@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -59,9 +59,6 @@ const industrySlug = (label) =>
     .replaceAll("&", "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-const page =
-  location.pathname.slice(basePath.length).split("/").filter(Boolean)[0] ||
-  "home";
 const icons = [
   Network,
   Wifi,
@@ -157,7 +154,7 @@ function Logo({ light = false, compact = false }) {
   );
 }
 
-function Header() {
+function Header({ page }) {
   const [open, setOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   useEffect(() => {
@@ -547,6 +544,8 @@ function Home() {
               >
                 <span
                   className="industry-picture [display:block] [position:absolute] [inset:0] [background-image:url('/industries-grid.png')] [background-size:400%_200%] [background-repeat:no-repeat] [transition:transform_0.25s]"
+                  role="img"
+                  aria-label={`${label} network infrastructure`}
                   style={{
                     backgroundPosition: `${((index % 4) * 100) / 3}% ${Math.floor(index / 4) * 100}%`,
                   }}
@@ -1366,7 +1365,8 @@ function RateTable({ items, onAdd, regionIndex }) {
   );
 }
 function useEstimate() {
-  const [estimate, setEstimate] = useState(readEstimate);
+  const [estimate, setEstimate] = useState({});
+  useEffect(() => setEstimate(readEstimate()), []);
   const update = (id, quantity) =>
     setEstimate((current) => {
       const next = { ...current };
@@ -1378,8 +1378,8 @@ function useEstimate() {
   return [estimate, update];
 }
 
-function RatesPage() {
-  const searchParams = new URLSearchParams(location.search);
+function RatesPage({ search }) {
+  const searchParams = new URLSearchParams(search);
   const initial = searchParams.get("category");
   const initialRegion = regions.findIndex(
     ({ id }) => id === searchParams.get("region"),
@@ -1560,9 +1560,9 @@ function RoutersPage() {
   );
 }
 
-function EstimatePage() {
+function EstimatePage({ search }) {
   const initialRegion = regions.findIndex(
-    ({ id }) => id === new URLSearchParams(location.search).get("region"),
+    ({ id }) => id === new URLSearchParams(search).get("region"),
   );
   const [regionIndex, setRegionIndex] = useState(
     initialRegion < 0 ? 0 : initialRegion,
@@ -1769,7 +1769,12 @@ function TermsPage() {
   );
 }
 
-function App() {
+export function App({
+  pathname = location.pathname,
+  search = location.search,
+} = {}) {
+  const page =
+    pathname.slice(basePath.length).split("/").filter(Boolean)[0] || "home";
   const content = {
     home: <Home />,
     services: <ServicesPage />,
@@ -1778,8 +1783,8 @@ function App() {
     about: <AboutPage />,
     contact: <ContactPage />,
     routers: <RoutersPage />,
-    rates: <RatesPage />,
-    estimate: <EstimatePage />,
+    rates: <RatesPage search={search} />,
+    estimate: <EstimatePage search={search} />,
     terms: <TermsPage />,
   }[page] || <Home />;
   return (
@@ -1788,11 +1793,16 @@ function App() {
         "[font-family:Inter,_Arial,_Helvetica,sans-serif] [color:#071c3b] [background-color:#fff] [font-synthesis:none] [scroll-behavior:smooth] [&_*]:[box-sizing:border-box] [&_body]:m-0 [&_button]:cursor-pointer [&_a]:[text-decoration:none] [&_button]:[font:inherit] [&_input]:[font:inherit] [&_select]:[font:inherit] [&_img]:block [&_img]:[max-width:100%]"
       }
     >
-      <Header />
+      <Header page={page} />
       {content}
       <Footer />
     </div>
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+const rootElement =
+  typeof document === "undefined" ? null : document.getElementById("root");
+if (rootElement) {
+  if (rootElement.hasChildNodes()) hydrateRoot(rootElement, <App />);
+  else createRoot(rootElement).render(<App />);
+}
