@@ -1,6 +1,7 @@
 export const regions = [
-  { id: "maharashtra", label: "Maharashtra (outside Mumbai)", uplift: "+15%" },
-  { id: "other-states", label: "Other states", uplift: "+25%" },
+  { id: "mumbai", label: "Mumbai", uplift: "Base rates" },
+  { id: "outside-mumbai", label: "Outside Mumbai", uplift: "+15%" },
+  { id: "other-state", label: "Other state", uplift: "+25%" },
 ];
 
 export const regionalRates = [

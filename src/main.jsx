@@ -106,8 +106,10 @@ const catalogue = categories.flatMap((category, categoryIndex) =>
     name: row[0],
     unit: row[1],
     rate: row[2],
-    regionalRates: regionalRates[categoryIndex].map(
-      (region) => region[rowIndex],
+    regionalRates: regions.map((_, regionIndex) =>
+      regionIndex === 0
+        ? row[2]
+        : regionalRates[categoryIndex][regionIndex - 1][rowIndex],
     ),
     note: row[3],
   })),
@@ -1414,7 +1416,7 @@ function RatesPage() {
       <main className="page-body shell [padding-top:48px] [padding-bottom:70px] max-[600px]:[padding-top:35px] mx-auto w-full max-w-[1680px] px-6 max-[600px]:[padding-left:20px] max-[600px]:[padding-right:20px]">
         <PageIntro
           title={`Regional service price list — ${regions[regionIndex].label}`}
-          text={`Indicative labour and service rates in Indian Rupees. Pricing basis: indicative ${regions[regionIndex].uplift} uplift on labour/service rates. Rates are suggested estimates, not verified market quotations; confirm the final rate after reviewing the site and scope.`}
+          text={`Indicative labour and service rates in Indian Rupees. Pricing basis: ${regionIndex === 0 ? "Mumbai base rates" : `indicative ${regions[regionIndex].uplift} uplift on labour/service rates`}. Rates are suggested estimates, not verified market quotations; confirm the final rate after reviewing the site and scope.`}
         />
         <div className="rate-controls mb-3 flex flex-wrap items-center gap-3">
           <label className="select-box flex items-center gap-2 rounded-lg border px-4 [height:46px] [border-color:#d4e1ed] [color:#3471ab] [background:#fff] [&_select]:border-0 [&_select]:outline-none [&_select]:[max-width:320px] [&_select]:[color:#0b2443] [&_select]:[background:transparent]">
@@ -1615,7 +1617,12 @@ function EstimatePage() {
               <optgroup key={c.title} label={c.title}>
                 {c.rows.map((row, ri) => (
                   <option key={`${ci}-${ri}`} value={`${ci}-${ri}`}>
-                    {row[0]} — {displayRate(regionalRates[ci][regionIndex][ri])}
+                    {row[0]} —{" "}
+                    {displayRate(
+                      regionIndex === 0
+                        ? row[2]
+                        : regionalRates[ci][regionIndex - 1][ri],
+                    )}
                   </option>
                 ))}
               </optgroup>
